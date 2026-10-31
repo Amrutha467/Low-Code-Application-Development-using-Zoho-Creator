@@ -1,0 +1,1652 @@
+/*
+ * Author       : amruthavalli.m.2024.cse_r593
+ * Generated on : 20-Oct-2026 09:11:52
+ * Version      : 1.0
+ */
+ application "Apartment Maintenance Management System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Maintenance_Request_Form
+		{
+			displayname = "Maintenance Request Form"
+			success message = "Maintenance Request Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Request_ID
+			(
+    			type = autonumber
+				displayname = "Request ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Resident_Name
+			(
+				type = picklist	
+				displayname = "Resident Name"
+				values  = Resident_Form.ID
+    			displayformat = [Resident_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Request_Title
+			(
+    			type = text
+				displayname = "Request Title"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Description
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Category
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Plumbing","Electrical","Lift","Cleaning","Water Supply","Other"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Priority
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Low","Medium","High"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Pending","In Progress","Completed","Rejected"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Request_Date
+			(
+    			type = date
+				displayname = "Request Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Pending","In Progress","Completed"}
+			}
+		}
+		form Maintenance_Staff_Form
+		{
+			displayname = "Maintenance Staff Form"
+			success message = "Maintenance Staff Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Staff_ID
+			(
+    			type = autonumber
+				displayname = "Staff ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Staff_Name
+			(
+    			type = name
+				displayname = "Staff Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Specialization
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Plumbing","Electrical","Lift","Cleaning","General Maintenance"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Availability_Status
+			(
+				type = picklist
+				displayname = "Availability Status"
+				maxchar = 100
+				values = {"Available","Busy","On Leave"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Email_Address
+			(
+    			type = email
+				displayname = "Email Address"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Payment_Form
+		{
+			displayname = "Payment Form"
+			success message = "Payment Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Payment_ID
+			(
+    			type = autonumber
+				displayname = "Payment ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Resident_Name
+			(
+				type = picklist	
+				displayname = "Resident Name"
+				values  = Resident_Form.ID
+    			displayformat = [Resident_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Payment_Month
+			(
+    			type = text
+				displayname = "Payment Month"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Payment_Year
+			(
+				type = number
+				displayname = "Payment Year"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Amount
+			(
+				type = INR
+				format = commadotindian
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Payment_Date
+			(
+    			type = date
+				displayname = "Payment Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Payment_Status
+			(
+				type = picklist
+				displayname = "Payment Status"
+				maxchar = 100
+				values = {"Paid","Pending","Overdue"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Payment_Method
+			(
+				type = picklist
+				displayname = "Payment Method"
+				maxchar = 100
+				values = {"Card","Cash","UPI","Bank Transfer"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Resident_Form
+		{
+			displayname = "Resident Form"
+			success message = "Resident Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Resident_Name
+			(
+    			type = text
+				displayname = "Resident Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Flat_Number
+			(
+    			type = text
+				displayname = "Flat Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Phone_Number1
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Email_Address
+			(
+    			type = email
+				displayname = "Email Address"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Service_Complaint_Form
+		{
+			displayname = "Service/Complaint Form"
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Complaint_ID
+			(
+    			type = autonumber
+				displayname = "Complaint ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Maintenance_Request
+			(
+				type = picklist	
+				displayname = "Maintenance Request "
+				values  = Maintenance_Request_Form.ID
+    			displayformat = [Request_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Complaint_Category
+			(
+				type = picklist
+				displayname = "Complaint Category"
+				maxchar = 100
+				values = {"Plumbing","Electrical","Lift","Cleaning","Water Supply","Other"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Priority
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Low","Medium","High"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Assigned_Staff
+			(
+				type = picklist	
+				displayname = "Assigned Staff"
+				values  = Maintenance_Staff_Form.ID
+    			displayformat = [" " + Staff_Name.prefix + " " + Staff_Name.first_name + " " + Staff_Name.last_name + " " + Staff_Name.suffix]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Complaint_Status
+			(
+				type = picklist
+				displayname = "Complaint Status"
+				maxchar = 100
+				values = {"Pending","In Progress","Resolved","Rejected"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Complaint_Date
+			(
+    			type = date
+				displayname = "Complaint Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Resolution_Details
+			(
+    			type = textarea
+				displayname = "Resolution Details"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Residents
+		{
+			displayName = "All Residents"
+			show all rows from Resident_Form    
+			(
+				Resident_Name as "Resident Name"
+				Flat_Number as "Flat Number"
+				Phone_Number1 as "Phone Number"
+				(
+					displayformat = plainnumber 
+				)
+				Email_Address as "Email Address"
+			)
+		}
+		default list All_Maintenance_Requests
+		{
+			displayName = "All Maintenance Requests"
+			show all rows from Maintenance_Request_Form    
+			(
+				Request_ID as "Request ID"
+				Resident_Name as "Resident Name"
+				Request_Title as "Request Title"
+				Description
+				Category
+				Priority
+				Status
+				Request_Date as "Request Date"
+			)
+		}
+		default list All_Maintenance_Staffs
+		{
+			displayName = "All Maintenance Staffs"
+			show all rows from Maintenance_Staff_Form    
+			(
+				Staff_ID as "Staff ID"
+				Staff_Name  as "Staff Name"
+				Phone_Number as "Phone Number"
+				(
+					displayformat = plainnumber 
+				)
+				Specialization
+				Availability_Status as "Availability Status"
+				Email_Address as "Email Address"
+			)
+		}
+		default list All_Payments
+		{
+			displayName = "All Payments"
+			show all rows from Payment_Form    
+			(
+				Payment_ID as "Payment ID"
+				Resident_Name as "Resident Name"
+				Payment_Month as "Payment Month"
+				Payment_Year as "Payment Year"
+				Amount
+				Payment_Date as "Payment Date"
+				Payment_Status as "Payment Status"
+				Payment_Method as "Payment Method"
+			)
+		}
+		default list Service_Complaint_Form_Report
+		{
+			displayName = "Service/Complaint Form Report"
+			show all rows from Service_Complaint_Form    
+			(
+				Complaint_ID as "Complaint ID"
+				Maintenance_Request as "Maintenance Request "
+				Complaint_Category as "Complaint Category"
+				Priority
+				Assigned_Staff as "Assigned Staff"
+				Complaint_Status as "Complaint Status"
+				Complaint_Date as "Complaint Date"
+				Resolution_Details as "Resolution Details"
+			)
+		}
+		list Pending_Maintenance_Requests
+		{
+			displayName = "Pending Maintenance Requests"
+			show all rows from Maintenance_Request_Form  [Status == "Pending"]  
+			(
+				Resident_Name as "Resident Name"
+				Request_Date as "Request Date"
+				Status
+				Request_ID as "Request ID"
+				Request_Title as "Request Title"
+				Priority
+				Category
+				Description
+			)
+			filters
+			(
+				"Pending Requests"  :  Status == "Pending"
+			)
+			sort by
+			(
+				Request_Date descending
+			)
+		}
+	}
+	pages
+	{
+		page Maintenance_Dashboard
+		{
+			displayname = "Maintenance Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='34%'\n   \t>\n\t<chart \n\telementName='Chart'\n\n\ttype = 'Donut'\n\txtitle = 'Request Status'\n\tytitle = 'Number of Requests'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme2'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Maintenance_Request_Form'\n\txfield = 'Status'\n\tyfields = 'count:Request_ID'\n\tshowDataLabel = 'true'\n/>\n\n</column><column\n   \t\t width='30%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\ttype = 'Donut'\n\txtitle = 'Payment Status'\n\tytitle = 'Number of Payments'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Payment_Form'\n\txfield = 'Payment_Status'\n\tyfields = 'count:Payment_ID'\n\tshowDataLabel = 'true'\n/>\n\n</column><column\n   \t\t width='36%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '7px' \n\n\tcolor = '#FFFFFF'\n\tbgColor = '#0ABB51'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'zc-li-solid education-grammar-check'\n\tsize = '24px'\n\tcornerRadius = '26px'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n\t\thAlign = 'left'\n>\n\t<text \n\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Approvals pending'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n\t\thAlign = 'left'\n>\n\t<text \n\n\tmarginTop = '2px'\n\tcolor = '#0ABB51'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = '25'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel 1'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '7px' \n\n\tcolor = '#FFFFFF'\n\tbgColor = '#2A70E7'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'zc-li-solid files-no-access'\n\tsize = '24px'\n\tcornerRadius = '26px'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n\t\thAlign = 'left'\n>\n\t<text \n\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Requests declined'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n\t\thAlign = 'left'\n>\n\t<text \n\n\tmarginTop = '2px'\n\tcolor = '#2A70E7'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = '10'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<form \n\telementName='Form'\n\n\tappLinkName = 'thisapp'\n\tlinkName = 'Maintenance_Request_Form'\n\theightType = 'auto'\n\tzc_Header = 'true'\n/> \n</column><column\n   \t\t width='50%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'All_Residents'\n\t\n\t\tiszreport = 'false'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			Set_Request_Status_Pendin as "Set Request Status Pending"
+			{
+				type =  form
+				form = Maintenance_Request_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Status = "Pending";
+						)
+					}
+					actions 
+					{
+						sendmail
+						(
+							from : "thilakakalyanasundaram@gmail.com"
+							to : "amruthavalli.m.2024.cse@rajalakshmi.edu.in"
+							subject : "New Maintenance Request Submitted"
+							message : "<p><span>A new maintenance request has been submitted successfully.</span><br></p><p><span>Please review the request and arrange maintenance staff to resolve the issue.</span><br></p><p></p><div><span>Thank you,</span><br></div><div><span>Apartment Maintenance Management System</span><br></div><p></p><div><br></div>"
+							content type : Plain Text
+							attachments : template : _default1 as inline
+						)
+					}
+				}
+
+			}
+		}
+
+		schedule
+		{
+			Daily_Pending_Complaint_R as "Daily Pending Complaint Reminder"
+			{
+				type =  schedule
+				start = "2026-10-14 09:00:00"
+				frequency = daily
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						pendingRequests = Maintenance_Request_Form[Status == "Pending"];
+					)
+					}
+					actions 
+					{
+						sendmail
+						(
+							from : "thilakakalyanasundaram@gmail.com"
+							to : "amruthavalli.m.2024.cse@rajalakshmi.edu.in"
+							subject : "Daily Pending Maintenance Requests"
+							message : "<div><span>This is your daily reminder to review pending maintenance requests in the Apartment Maintenance Management System.</span><br></div>"
+							content type : Plain Text
+						)
+					}
+				}
+			}
+		}
+
+		approval
+		{
+			Maintenance_Request_Appro as "Maintenance Request Approval"
+			{
+				type =  approval
+				form = Maintenance_Request_Form
+				display fields = [Request_ID,Resident_Name,Request_Title,Description,Category,Priority,Status]
+				on start
+				{
+				}
+				on level 1
+				{
+					on approve 
+					{
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been approved."
+							)
+						}
+						actions 
+						{
+						update Maintenance_Request_Form[ID == input.ID]
+						[
+							Status = "In Progress"
+						]
+						}
+					}
+					on reject
+					{
+
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been rejected."
+							)
+						}
+						actions 
+						{
+						update Maintenance_Request_Form[ID == input.ID]
+						[
+							Status = "Rejected"
+						]
+						}
+					}
+				}
+			}
+		}
+
+		blueprint
+		{
+    			Maintenance_Request_Proce as "Maintenance Request Process"
+    			{
+        			type = Blueprint
+        			form = Maintenance_Request_Form
+        			start
+        			{
+            			start stage = "Pending"
+            			chart data
+            			{
+                			from port : B
+                			to port   : T2
+                			position  : "0 0"
+                			path      : [27.849999999999994,36.84,27.849999999999994,46.84,27.849999999999994,78.92,-411.60685102706816,78.92,-411.60685102706816,111,-411.60685102706816,121]
+            			}
+        			}
+        			stages
+        			{
+           			"Pending"
+           			{
+               			chart data
+               			{
+                   			position : "-446.0205530812045 121"
+               			}
+           			}
+           			"In Progress"
+           			{
+               			chart data
+               			{
+                   			position : "-269 117.6334448160535"
+               			}
+           			}
+           			"Completed"
+           			{
+               			chart data
+               			{
+                   			position : "-62 112.6334448160535"
+               			}
+           			}
+        			}
+        			transitions
+        			{
+    				Complete_Maintenance_Work as "Complete Maintenance Work"
+    				{
+         				type = normal
+         				from stage = "In Progress"
+         				to stage = "Completed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+         				chart data
+         				{
+             				from port : R1
+             				to port   : L1
+             				path      : [-156.98890482391903,143.4373597136643,-146.98890482391903,143.4373597136643,-109.49445241195951,143.4373597136643,-109.49445241195951,138.4373597136643,-72,138.4373597136643,-62,138.4373597136643]
+        				}
+  				}
+    				Start_Maintenance_Work as "Start Maintenance Work"
+    				{
+         				type = normal
+         				from stage = "Pending"
+         				to stage = "In Progress"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+         				chart data
+         				{
+             				from port : R1
+             				to port   : L1
+             				path      : [-352.27944691879543,146.8039148976108,-342.27944691879543,146.8039148976108,-310.6397234593977,146.8039148976108,-310.6397234593977,143.4373597136643,-279,143.4373597136643,-269,143.4373597136643]
+        				}
+  				}
+        			}
+    			}
+		}
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "AMM"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Maintenance_Request_Form
+			{
+				label placement = left
+			}
+			form Maintenance_Staff_Form
+			{
+				label placement = left
+			}
+			form Payment_Form
+			{
+				label placement = left
+			}
+			form Resident_Form
+			{
+				label placement = left
+			}
+			form Service_Complaint_Form
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Residents
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Resident_Name as "Resident Name"
+								Flat_Number as "Flat Number"
+								Phone_Number1 as "Phone Number"
+								Email_Address as "Email Address"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Resident_Name as "Resident Name"
+								Flat_Number as "Flat Number"
+								Phone_Number1 as "Phone Number"
+								Email_Address as "Email Address"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Maintenance_Requests
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Request_ID as "Request ID"
+								Resident_Name as "Resident Name"
+								Request_Title as "Request Title"
+								Description
+								Category
+								Priority
+								Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Request_ID as "Request ID"
+								Resident_Name as "Resident Name"
+								Request_Title as "Request Title"
+								Description
+								Category
+								Priority
+								Status
+								Request_Date as "Request Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Maintenance_Staffs
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Staff_ID as "Staff ID"
+								Staff_Name as "Staff Name"
+								Phone_Number as "Phone Number"
+								Specialization
+								Availability_Status as "Availability Status"
+								Email_Address as "Email Address"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Staff_ID as "Staff ID"
+								Staff_Name as "Staff Name"
+								Phone_Number as "Phone Number"
+								Specialization
+								Availability_Status as "Availability Status"
+								Email_Address as "Email Address"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Payments
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Payment_ID as "Payment ID"
+								Resident_Name as "Resident Name"
+								Payment_Month as "Payment Month"
+								Payment_Year as "Payment Year"
+								Amount
+								Payment_Date as "Payment Date"
+								Payment_Status as "Payment Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Payment_ID as "Payment ID"
+								Resident_Name as "Resident Name"
+								Payment_Month as "Payment Month"
+								Payment_Year as "Payment Year"
+								Amount
+								Payment_Date as "Payment Date"
+								Payment_Status as "Payment Status"
+								Payment_Method as "Payment Method"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Service_Complaint_Form_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Maintenance_Request as "Maintenance Request "
+								Complaint_Category as "Complaint Category"
+								Priority
+								Assigned_Staff as "Assigned Staff"
+								Complaint_Status as "Complaint Status"
+								Complaint_Date as "Complaint Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Complaint_ID as "Complaint ID"
+								Maintenance_Request as "Maintenance Request "
+								Complaint_Category as "Complaint Category"
+								Priority
+								Assigned_Staff as "Assigned Staff"
+								Complaint_Status as "Complaint Status"
+								Complaint_Date as "Complaint Date"
+								Resolution_Details as "Resolution Details"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Pending_Maintenance_Requests
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Resident_Name as "Resident Name"
+								Request_Date as "Request Date"
+								Status
+								Request_Title as "Request Title"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+							)
+						record
+						(
+							Edit   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						request_details
+						(
+		     				title = "Request Details"
+							fields
+							(
+								Request_ID as "Request ID"
+								Request_Title as "Request Title"
+								Resident_Name as "Resident Name"
+								Request_Date as "Request Date"
+								Status
+								Priority
+								Category
+								Description
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Residents
+				{
+					displayname = "Residents"
+					icon = "users-2-wc"
+					form  Resident_Form
+					{
+						icon = "design-2-form"
+					}
+					report All_Residents
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Maintenance_Requests
+				{
+					displayname = "Maintenance Requests"
+					icon = "tech-2-l-check"
+					form  Maintenance_Request_Form
+					{
+						icon = "tech-2-l-search"
+					}
+					report All_Maintenance_Requests
+					{
+						icon = "tech-desktop"
+					}
+					report Pending_Maintenance_Requests
+					{
+						icon = "ui-2-hourglass"
+					}
+				}
+				section Maintenance_Staffs
+				{
+					displayname = "Maintenance Staffs"
+					icon = "holidays-sickle"
+					form  Maintenance_Staff_Form
+					{
+						icon = "holidays-sickle"
+					}
+					report All_Maintenance_Staffs
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Payments
+				{
+					displayname = "Payments"
+					icon = "shopping-credit-card-in"
+					form  Payment_Form
+					{
+						icon = "shopping-receipt"
+					}
+					report All_Payments
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Service_Complaint_Form
+				{
+					displayname = "Service/Complaint Form"
+					icon = "design-2-form"
+					form  Service_Complaint_Form
+					{
+						icon = "design-2-form"
+					}
+					report Service_Complaint_Form_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Maintenance_Dashboard
+				{
+					displayname = "Maintenance Dashboard"
+					icon = "ui-1-dashboard-half"
+					page Maintenance_Dashboard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Maintenance_Request_Form
+			{
+				label placement = auto
+			}
+			form Maintenance_Staff_Form
+			{
+				label placement = auto
+			}
+			form Payment_Form
+			{
+				label placement = auto
+			}
+			form Resident_Form
+			{
+				label placement = auto
+			}
+			form Service_Complaint_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Maintenance_Request_Form
+			{
+				label placement = auto
+			}
+			form Maintenance_Staff_Form
+			{
+				label placement = auto
+			}
+			form Payment_Form
+			{
+				label placement = auto
+			}
+			form Resident_Form
+			{
+				label placement = auto
+			}
+			form Service_Complaint_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = green
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
